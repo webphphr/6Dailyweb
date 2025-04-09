@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Milestones</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #eef1f5;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .progress {
+      height: 25px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .reward {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .reward.unlocked {
+      background: #d4edda;
+      color: #155724;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #007bff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 Milestone Rewards</h1>
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="reward" id="reward1">🎁 Milestone 1 (33%) — 100 Robux <span>Status: Locked</span></div>
+  <div class="reward" id="reward2">🎁 Milestone 2 (66%) — 500 Robux <span>Status: Locked</span></div>
+  <div class="reward" id="reward3">🎁 Milestone 3 (100%) — 1500 Robux <span>Status: Locked</span></div>
+
+  <a class="back-link" href="index.html">⬅️ Back to Homework</a>
+
+  <script>
+    const progress = parseInt(localStorage.getItem('progress')) || 0;
+
+    const progressBar = document.getElementById('progressBar');
+    const reward1 = document.getElementById('reward1');
+    const reward2 = document.getElementById('reward2');
+    const reward3 = document.getElementById('reward3');
+
+    function updateReward(element, unlocked) {
+      if (unlocked) {
+        element.classList.add('unlocked');
+        element.querySelector('span').innerText = 'Unlocked ✅';
+      } else {
+        element.classList.remove('unlocked');
+        element.querySelector('span').innerText = 'Locked';
+      }
+    }
+
+    progressBar.style.width = progress + '%';
+    updateReward(reward1, progress >= 33);
+    updateReward(reward2, progress >= 66);
+    updateReward(reward3, progress >= 100);
+  </script>
+</body>
+</html>
